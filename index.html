@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1, user-scalable=no" />
+<title>For My Jaan Maan ❤️</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,500&family=Manrope:wght@400;500;600;700&family=Noto+Nastaliq+Urdu:wght@500;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+  <!-- Ambient starfield / particle canvas, lives behind every step -->
+  <canvas id="bg-canvas"></canvas>
+
+  <!-- Fireworks canvas, only active during Step 5 -->
+  <canvas id="fw-canvas"></canvas>
+
+  <div id="stage">
+
+    <!-- ============================================================ -->
+    <!-- STEP 1 — PASSWORD                                             -->
+    <!-- ============================================================ -->
+    <section class="step" id="step-password" data-step="1">
+      <div class="glass-card">
+        <p class="kicker">You know, keeping it locked is important 🙄🫣🤭</p>
+        <h1 class="headline">For My Jaan</h1>
+        <p class="sub">I already told you the password, remember...🙄🙄😑? </p>
+
+        <form id="password-form" autocomplete="off">
+          <div class="field">
+            <input type="password" id="password-input" placeholder="Type here..." autocomplete="off" />
+          </div>
+          <button type="submit" class="btn-primary">Unlock</button>
+        </form>
+
+        <p class="error-msg" id="password-error">Jaan, don’t you remember...🥺?</p>
+      </div>
+    </section>
+
+    <!-- ============================================================ -->
+    <!-- STEP 2 — DO YOU LOVE ME?                                      -->
+    <!-- ============================================================ -->
+    <section class="step" id="step-q1" data-step="2">
+      <div class="glass-card">
+        <p class="kicker">Question one</p>
+        <h1 class="headline">Do you love me...?</h1>
+        <div class="choice-row">
+          <button class="btn-choice" data-answer="yes">❤️ Yes</button>
+          <button class="btn-choice" data-answer="no">❌ No</button>
+        </div>
+        <p class="error-msg" id="q1-error">You Can't Love Me...😠😞</p>
+      </div>
+    </section>
+
+    <!-- ============================================================ -->
+    <!-- STEP 3 — MEMORABLE CONVERSATION                               -->
+    <!-- ============================================================ -->
+    <section class="step" id="step-q2" data-step="3">
+      <div class="glass-card">
+        <p class="kicker">Question two</p>
+        <h1 class="headline">What was our most memorable conversation?</h1>
+        <div class="choice-row">
+          <button class="btn-choice" data-answer="series">🎬 That series we watched</button>
+          <button class="btn-choice" data-answer="romantic">❤️ The romantic one</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- Teasing popup for the "series" answer -->
+    <div class="popup-overlay" id="teasing-popup">
+      <div class="glass-card popup-card">
+        <p class="popup-text"> Kabhi Ao Milny Series Complete kryn...🫣 <em>Meri Jaan</em> Shararti...🙄😁</p>
+        <button class="btn-primary" id="popup-close">Meri Trf sy Done Hai 😁</button>
+      </div>
+    </div>
+
+    <!-- ============================================================ -->
+    <!-- STEP 4 — WHAT ARE YOU TO ME?                                  -->
+    <!-- ============================================================ -->
+    <section class="step" id="step-q3" data-step="4">
+      <div class="glass-card">
+        <p class="kicker">Question three</p>
+        <h1 class="headline">You are My...?</h1>
+        <div class="choice-row">
+          <button class="btn-choice" data-answer="girlfriend">Girlfriend</button>
+          <button class="btn-choice" data-answer="wifey">Mera Ladla Bachaw</button>
+        </div>
+        <p class="error-msg" id="q3-error">Aryy Ap Mera Bachaw Ho...😘</p>
+      </div>
+      <div class="heart-burst" id="heart-burst"></div>
+    </section>
+
+    <!-- ============================================================ -->
+    <!-- STEP 5 — FIREWORKS + HAPPY BIRTHDAY                           -->
+    <!-- ============================================================ -->
+    <section class="step" id="step-fireworks" data-step="5">
+      <div class="bday-wrap">
+        <h1 class="bday-text" id="bday-text">Happy Birthday Meri Jaan...😘</h1>
+        <span class="bday-heart">❤️</span>
+      </div>
+      <button class="btn-primary btn-ghost" id="continue-to-cake">Continue</button>
+    </section>
+
+    <!-- ============================================================ -->
+    <!-- STEP 6 — INTERACTIVE CAKE                                     -->
+    <!-- ============================================================ -->
+    <section class="step" id="step-cake" data-step="6">
+      <div class="glass-card cake-card">
+        <p class="kicker">Happy Birthday My Girl...😘</p>
+        <h1 class="headline">tap the flame</h1>
+        <p class="sub" id="cake-sub"></p>
+
+        <div class="cake-scene" id="cake-scene">
+          <svg class="candle-flame-svg" id="candle-flame-svg" viewBox="0 0 80 140" aria-label="Blow out the candle">
+            <g id="smoke-group" class="smoke-group"></g>
+            <ellipse id="flame-glow" class="flame-glow" cx="40" cy="22" rx="26" ry="30"/>
+            <path id="flame" class="flame" d="M40 6 C 52 24, 50 40, 40 46 C 30 40, 28 24, 40 6 Z"/>
+            <path class="flame-inner" d="M40 22 C 46 32, 45 40, 40 44 C 35 40, 34 32, 40 22 Z"/>
+            <rect class="wick" x="38.5" y="40" width="3" height="10" rx="1.5"/>
+            <rect class="candle-body" x="30" y="48" width="20" height="60" rx="4"/>
+            <rect class="candle-stripe" x="30" y="62" width="20" height="8"/>
+            <rect class="candle-stripe" x="30" y="86" width="20" height="8"/>
+          </svg>
+
+          <svg class="cake-svg" viewBox="0 0 320 200" aria-hidden="true">
+            <ellipse cx="160" cy="185" rx="150" ry="14" class="cake-shadow"/>
+            <rect x="40" y="120" width="240" height="60" rx="14" class="cake-tier cake-tier-bottom"/>
+            <rect x="80" y="70" width="160" height="55" rx="12" class="cake-tier cake-tier-top"/>
+            <path d="M40 122 Q 60 108 80 122 T 120 122 T 160 122 T 200 122 T 240 122 T 280 122 L280 130 L40 130 Z" class="cake-drip cake-drip-bottom"/>
+            <path d="M80 72 Q 96 60 112 72 T 144 72 T 176 72 T 208 72 T 240 72 L240 80 L80 80 Z" class="cake-drip cake-drip-top"/>
+            <circle cx="70" cy="150" r="5" class="sprinkle"/>
+            <circle cx="110" cy="160" r="5" class="sprinkle"/>
+            <circle cx="200" cy="155" r="5" class="sprinkle"/>
+            <circle cx="250" cy="150" r="5" class="sprinkle"/>
+            <circle cx="105" cy="98" r="4" class="sprinkle"/>
+            <circle cx="200" cy="100" r="4" class="sprinkle"/>
+          </svg>
+        </div>
+
+        <button class="btn-primary" id="cake-continue" disabled>Continue</button>
+      </div>
+    </section>
+
+    <!-- ============================================================ -->
+    <!-- STEP 7 — SECRET MESSAGE                                       -->
+    <!-- ============================================================ -->
+    <section class="step" id="step-secret" data-step="7">
+      <div class="glass-card message-card">
+        <p class="kicker">Sirf Apky liy meri Jaan</p>
+        <h1 class="headline">A secret</h1>
+        <p class="typewriter-text" id="secret-text"></p>
+        <button class="btn-primary reveal-next" id="secret-continue" style="opacity:0; pointer-events:none;">Continue</button>
+      </div>
+    </section>
+
+    <!-- ============================================================ -->
+    <!-- STEP 8 — LOVE LETTER                                          -->
+    <!-- ============================================================ -->
+    <section class="step" id="step-letter" data-step="8">
+      <div class="glass-card message-card letter-card">
+        <p class="kicker">A Love letter</p>
+        <h1 class="headline">Meri Jaan k liy</h1>
+        <p class="typewriter-text letter-text" id="letter-text"></p>
+        <p class="signature" id="signature-text" style="opacity:0;"></p>
+        <button class="btn-primary reveal-next" id="letter-continue" style="opacity:0; pointer-events:none;">Continue</button>
+      </div>
+    </section>
+
+    <!-- ============================================================ -->
+    <!-- STEP 9 — FINAL LINKS                                          -->
+    <!-- ============================================================ -->
+    <section class="step" id="step-links" data-step="9">
+      <div class="glass-card links-card">
+        <p class="kicker">one last thing</p>
+        <h1 class="headline">Explore a little more</h1>
+        <div class="links-grid" id="links-grid"></div>
+      </div>
+    </section>
+
+  </div>
+
+<script src="script.js"></script>
+</body>
+</html>
